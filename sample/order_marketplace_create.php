@@ -18,7 +18,7 @@
 // Usage: php order_marketplace_create.php
 
 include __DIR__.'/../src/Riskified/autoloader.php';
-use Riskified\Common\Riskified;
+use Riskified\Common\RiskifiedAsync;
 use Riskified\Common\Env;
 use Riskified\Common\Validations;
 use Riskified\Common\Signature;
@@ -31,7 +31,7 @@ $domain = "[your shop domain as registered to Riskified]";
 # Replace with the 'auth token' listed in the Riskified web app under the 'Settings' Tab
 $authToken = "[your authentication token string]";
 
-Riskified::init($domain, $authToken, Env::SANDBOX, Validations::IGNORE_MISSING);
+RiskifiedAsync::init($domain, $authToken, Env::SANDBOX, Validations::IGNORE_MISSING);
 
 # Order
 $order = new Model\Order(array(
