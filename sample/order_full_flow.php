@@ -17,13 +17,13 @@
 // An example of a complete order flow.
 // Usage: php order_full_flow.php
 
-include __DIR__.'/../src/Riskified/autoloader.php';
-use Riskified\Common\RiskifiedAsync;
-use Riskified\Common\Env;
-use Riskified\Common\Validations;
-use Riskified\Common\Signature;
-use Riskified\OrderWebhook\Model;
-use Riskified\OrderWebhook\Transport;
+include __DIR__.'/../src/RiskifiedAsync/autoloader.php';
+use RiskifiedAsync\Common\RiskifiedAsync;
+use RiskifiedAsync\Common\Env;
+use RiskifiedAsync\Common\Validations;
+use RiskifiedAsync\Common\Signature;
+use RiskifiedAsync\OrderWebhook\Model;
+use RiskifiedAsync\OrderWebhook\Transport;
 
 # Replace with the 'shop domain' of your account in Riskified
 $domain = "[your shop domain as registered to Riskified]";

@@ -17,10 +17,10 @@
 // Router handler for callback server
 // See run_callback_server.sh for usage
 
-include __DIR__.'/../src/Riskified/autoloader.php';
-use Riskified\Common\RiskifiedAsync;
-use Riskified\Common\Signature;
-use Riskified\DecisionNotification\Model;
+include __DIR__.'/../src/RiskifiedAsync/autoloader.php';
+use RiskifiedAsync\Common\RiskifiedAsync;
+use RiskifiedAsync\Common\Signature;
+use RiskifiedAsync\DecisionNotification\Model;
 
 # Replace with the 'shop domain' of your account in Riskified
 $domain = "[your shop domain as registered to Riskified]";
