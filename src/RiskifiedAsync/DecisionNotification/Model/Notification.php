@@ -1,4 +1,4 @@
-<?php namespace Riskified\DecisionNotification\Model;
+<?php namespace RiskifiedAsync\DecisionNotification\Model;
 /**
  * Copyright 2013-2015 Riskified.com, Inc. or its affiliates. All Rights Reserved.
  *
@@ -14,12 +14,12 @@
  * permissions and limitations under the License.
  */
 
-use Riskified\DecisionNotification\Exception;
+use RiskifiedAsync\DecisionNotification\Exception;
 
 /**
  * Class Notification
  * Parses and validates Decision Notification callbacks from Riskified
- * @package Riskified\DecisionNotification\Model
+ * @package RiskifiedAsync\DecisionNotification\Model
  */
 class Notification {
 
@@ -70,7 +70,7 @@ class Notification {
 
     /**
      * assets that the request authentication is valid
-     * @throws \Riskified\DecisionNotification\Exception\AuthorizationException on HMAC mismatch
+     * @throws \RiskifiedAsync\DecisionNotification\Exception\AuthorizationException on HMAC mismatch
      */
     protected function test_authorization() {
         $signature = $this->signature;
@@ -112,7 +112,7 @@ class Notification {
 
     /**
      * extracts parameters from HTTP POST body
-     * @throws \Riskified\DecisionNotification\Exception\BadPostJsonException on bad or missing parameters
+     * @throws \RiskifiedAsync\DecisionNotification\Exception\BadPostJsonException on bad or missing parameters
      */
     protected function parse_body() {
         $body = json_decode($this->body);
