@@ -1,8 +1,8 @@
 {
-    "name": "riskified/php_sdk",
+    "name": "stockx/php_sdk",
     "autoload": {
             "psr-4": {
-                "Riskified\\": "src/Riskified"
+                "RiskifiedAsync\\": "src/RiskifiedAsync"
             }    
      }
 } 

@@ -17,13 +17,13 @@
 // A simple example of submitting an order.
 // Usage: php order_simple_submit.php
 
-include __DIR__.'/../src/Riskified/autoloader.php';
-use Riskified\Common\Riskified;
-use Riskified\Common\Env;
-use Riskified\Common\Validations;
-use Riskified\Common\Signature;
-use Riskified\OrderWebhook\Model;
-use Riskified\OrderWebhook\Transport;
+include __DIR__.'/../src/RiskifiedAsync/autoloader.php';
+use RiskifiedAsync\Common\RiskifiedAsync;
+use RiskifiedAsync\Common\Env;
+use RiskifiedAsync\Common\Validations;
+use RiskifiedAsync\Common\Signature;
+use RiskifiedAsync\OrderWebhook\Model;
+use RiskifiedAsync\OrderWebhook\Transport;
 
 # Replace with the 'shop domain' of your account in Riskified
 $domain = "[your shop domain as registered to Riskified]";
@@ -31,7 +31,7 @@ $domain = "[your shop domain as registered to Riskified]";
 # Replace with the 'auth token' listed in the Riskified web app under the 'Settings' Tab
 $authToken = "[your authentication token string]";
 
-Riskified::init($domain, $authToken, Env::SANDBOX, Validations::IGNORE_MISSING);
+RiskifiedAsync::init($domain, $authToken, Env::SANDBOX, Validations::IGNORE_MISSING);
 
 # Order
 $order = new Model\Order(array(
@@ -153,7 +153,7 @@ $transport->timeout = 10;
 try {
     $response = $transport->submitOrder($order);
     echo PHP_EOL."Submit Order succeeded. Response: ".PHP_EOL.json_encode($response).PHP_EOL;
-} catch(\Riskified\OrderWebhook\Exception\UnsuccessfulActionException $uae) {
+} catch(\RiskifiedAsync\OrderWebhook\Exception\UnsuccessfulActionException $uae) {
     echo PHP_EOL."Submit Order not succeeded. Status code was: ".$uae->statusCode." and json body was: "
         .json_encode($uae->jsonResponse).PHP_EOL;
 } catch(Exception $e) {
