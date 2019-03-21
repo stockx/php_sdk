@@ -17,7 +17,7 @@
 /**
  * Class SocialDetails
  * data model of shipping line costs
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class SocialDetails extends AbstractModel {
 

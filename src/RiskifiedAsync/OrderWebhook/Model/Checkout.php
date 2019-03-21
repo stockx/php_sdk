@@ -17,7 +17,7 @@
 /**
  * Class Checkout
  * pre-order checkout data model, includes nested models
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Checkout extends Order {
 }

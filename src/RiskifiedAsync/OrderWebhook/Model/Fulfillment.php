@@ -17,7 +17,7 @@
 /**
  * Class Fulfillment
  * data model of an existing order's fulfillment attempts
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Fulfillment extends AbstractModel {
 

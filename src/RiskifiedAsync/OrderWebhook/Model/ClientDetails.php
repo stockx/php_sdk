@@ -17,7 +17,7 @@
 /**
  * Class ClientDetails
  * data model of client details of customer placing order
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class ClientDetails extends AbstractModel {
 

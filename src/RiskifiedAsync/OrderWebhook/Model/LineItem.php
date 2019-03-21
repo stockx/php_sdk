@@ -17,7 +17,7 @@
 /**
  * Class LineItem
  * data model of line items purchased
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class LineItem extends AbstractModel {
 

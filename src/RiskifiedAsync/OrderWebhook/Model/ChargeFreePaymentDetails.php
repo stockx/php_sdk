@@ -17,7 +17,7 @@
 /**
  * Class NonCֹhargeablePaymentDetails
  * data model of payment details that are not going to be charged by Riskified (e.g. eWallet / giftcard)
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class ChargeFreePaymentDetails extends AbstractModel {
 

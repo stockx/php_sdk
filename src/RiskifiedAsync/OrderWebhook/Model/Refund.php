@@ -17,7 +17,7 @@
 /**
  * Class Refund
  * data model of an exisiting order's refund details
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Refund extends AbstractModel {
 

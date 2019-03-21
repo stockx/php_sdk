@@ -17,7 +17,7 @@
 /**
  * Class PaymentDetails
  * data model of payment (credit card) details
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class PaymentDetails extends AbstractModel {
 

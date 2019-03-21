@@ -17,7 +17,7 @@
 /**
  * Class Attribute
  * data model of generic key-value attribute
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Attribute extends AbstractModel {
 

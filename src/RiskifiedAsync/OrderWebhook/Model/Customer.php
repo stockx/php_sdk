@@ -17,7 +17,7 @@
 /**
  * Class Customer
  * data model of customer in order
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Customer extends AbstractModel {
 

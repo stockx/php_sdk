@@ -17,7 +17,7 @@
 /**
  * Class Seller
  * data model of seller in a marketplace
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Seller extends AbstractModel {
 

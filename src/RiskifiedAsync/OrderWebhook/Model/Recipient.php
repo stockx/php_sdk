@@ -17,7 +17,7 @@
 /**
 * Class Recipient - used
  * data model of recipient details for digital goods line item (product)
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Recipient extends AbstractModel
 {
