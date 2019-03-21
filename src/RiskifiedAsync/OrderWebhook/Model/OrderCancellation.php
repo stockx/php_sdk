@@ -17,7 +17,7 @@
 /**
  * Class OrderCancellation
  * main data model for cancellation event
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class OrderCancellation extends AbstractModel {
 

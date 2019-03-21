@@ -17,7 +17,7 @@
 /**
  * Class Order
  * main data model, includes nested models
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class Order extends AbstractModel {
 

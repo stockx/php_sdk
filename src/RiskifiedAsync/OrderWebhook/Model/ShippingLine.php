@@ -17,7 +17,7 @@
 /**
  * Class ShippingLine
  * data model of shipping line costs
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class ShippingLine extends AbstractModel {
 

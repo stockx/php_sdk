@@ -17,7 +17,7 @@
 /**
  * Class FulfillmentDetails
  * data model of fulfillment
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class FulfillmentDetails extends AbstractModel {
 

@@ -17,7 +17,7 @@
 /**
  * Class OrderChargeback
  * main data model for chargeback event
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class OrderChargeback extends AbstractModel {
 

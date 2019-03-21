@@ -17,7 +17,7 @@
 /**
  * Class TaxLine
  * data model of tax line in order
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class TaxLine extends AbstractModel {
 

@@ -17,7 +17,7 @@
 /**
  * Class ChargebackDetails
  * data model of an existing order's chargeback details
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class ChargebackDetails extends AbstractModel {
 

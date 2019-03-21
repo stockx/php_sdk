@@ -17,7 +17,7 @@
 /**
  * Class DiscountCode
  * data model of discounts in order
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class DiscountCode extends AbstractModel {
 

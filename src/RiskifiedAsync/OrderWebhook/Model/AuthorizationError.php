@@ -17,7 +17,7 @@
 /**
  * Class AuthorizationError
  * failed result of an authorization attempt by a payment gateway.
- * @package RiskifiedAsyncAsync\OrderWebhook\Model
+ * @package RiskifiedAsync\OrderWebhook\Model
  */
 class AuthorizationError extends Order {
 
