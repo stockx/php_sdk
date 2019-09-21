@@ -1,4 +1,4 @@
-<?php namespace Riskified\OrderWebhook\Model;
+<?php namespace RiskifiedAsync\OrderWebhook\Model;
 /**
  * Copyright 2013-2015 Riskified.com, Inc. or its affiliates. All Rights Reserved.
  *
