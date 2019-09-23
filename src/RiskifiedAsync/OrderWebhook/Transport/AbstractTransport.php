@@ -39,8 +39,9 @@ abstract class AbstractTransport {
      * submit an order as json
      * @param $json object Order to send
      * @param $endpoint String API endpoint to send request
+     * @param $action api/customer. Default 'api'
      */
-    abstract protected function send_json_request($json, $endpoint);
+    abstract protected function send_json_request($json, $endpoint, $action = 'api');
 
     /**
      * set up transport
@@ -166,8 +167,7 @@ abstract class AbstractTransport {
 
     public function login($login) {
         $json = $login->toJson();
-        return $this->send_json_request($json, 'login');
-        return null;
+        return $this->send_json_request($json, 'login', 'customers');
     }
 
     public function sendHistoricalOrders($orders) {
@@ -187,7 +187,6 @@ abstract class AbstractTransport {
     protected function send_settings($settings) {
         $json = $settings->toJson();
         return $this->send_json_request($json, 'settings');
-        return null;
     }
 
     protected function send_checkout($checkout, $endpoint) {
@@ -206,12 +205,13 @@ abstract class AbstractTransport {
 
     /**
      * path prefix to the Riskified endpoint
+     * @param $action api/customers. Default 'api'
      * @return string
      */
-    protected function endpoint_prefix() {
+    protected function endpoint_prefix($action) {
         $protocol = ($this->use_https) ? 'https' : 'http';
-        return "$protocol://$this->url/api/";
-    }
+        return "$protocol://$this->url/$action/";
+}
 
     /**
      * construct headers for request

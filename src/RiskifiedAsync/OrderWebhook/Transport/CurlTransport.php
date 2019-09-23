@@ -34,8 +34,8 @@ class CurlTransport extends AbstractTransport {
      * @throws \RiskifiedAsync\OrderWebhook\Exception\UnsuccessfulActionException
      * @throws \RiskifiedAsync\OrderWebhook\Exception\CurlException
      */
-    protected function send_json_request($json, $endpoint) {
-        $ch = curl_init($this->endpoint_prefix().$endpoint);
+    protected function send_json_request($json, $endpoint, $action = 'api') {
+        $ch = curl_init($this->endpoint_prefix($action).$endpoint);
         $curl_options = array(
             CURLOPT_POSTFIELDS => $json,
             CURLOPT_CUSTOMREQUEST => 'POST',
