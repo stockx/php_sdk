@@ -14,16 +14,16 @@
  * permissions and limitations under the License.
  */
 
-use Riskified\Common\Env;
-use Riskified\Common\Riskified;
-use Riskified\Common\Validations;
+use RiskifiedAsync\Common\Env;
+use RiskifiedAsync\Common\RiskifiedAsync;
+use RiskifiedAsync\Common\Validations;
 
 /**
  * Class AbstractTransport
  * A base class for Transports for sending order data to Riskified
  * Orders will be created if the id was never used before, and updated if already created
  * Submission of orders is done by similarly to creation with an addition of a header
- * @package Riskified
+ * @package RiskifiedAsync
  */
 abstract class AbstractTransport {
 
@@ -43,29 +43,22 @@ abstract class AbstractTransport {
     abstract protected function send_json_request($json, $endpoint);
 
     /**
-     * submit an account action as json
-     * @param $json object account action to send
-     * @param $endpoint String API endpoint to send request
-     */
-    abstract protected function send_account_json_request($json, $endpoint);
-
-    /**
      * set up transport
      * @param $signature object Signature object for authentication handling
      * @param $url string Riskified endpoint (optional)
      */
     public function __construct($signature, $url = null) {
         $this->signature = $signature;
-        $this->url = ($url == null) ? Riskified::getHost() : $url;
-        $this->user_agent = 'riskified_php_sdk/' . Riskified::VERSION;
-        $this->use_https = Riskified::$env != Env::DEV;
+        $this->url = ($url == null) ? RiskifiedAsync::getHostByEnv() : $url;
+        $this->user_agent = 'riskified_php_sdk/' . RiskifiedAsync::VERSION;
+        $this->use_https = RiskifiedAsync::$env != Env::DEV;
     }
 
     /**
      * Update a merchant's settings
      * @param hash object named 'settings' with a key-value structure
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function updateMerchantSettings($settings) {
         return $this->send_settings($settings);
@@ -75,7 +68,7 @@ abstract class AbstractTransport {
      * Submit an Order to Riskified for review
      * @param $order object Order to submit
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function submitOrder($order) {
         return $this->send_order($order, 'submit', true);
@@ -85,28 +78,17 @@ abstract class AbstractTransport {
      * Send an Order to Riskified, will be reviewed based on current plan
      * @param $order object Order to send
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function createOrder($order) {
         return $this->send_order($order, 'create', true);
     }
 
     /**
-     * Send an Order to Riskified, will be synchronously reviewed based on current plan
-     * @param $order object Order to send
-     * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
-    */
-    public function decideOrder($order) {
-        $this->url = Riskified::getHost('sync');
-        return $this->send_order($order, 'decide', true);
-    }
-
-    /**
      * Update an existing order
      * @param $order object Order with updated fields
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function updateOrder($order) {
         return $this->send_order($order, 'update', false);
@@ -116,7 +98,7 @@ abstract class AbstractTransport {
      * Cancels an existing order
      * @param $order object Order with id, cancelled_at, cancel_reason fields
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function cancelOrder($order) {
         return $this->send_order($order, 'cancel', false);
@@ -126,7 +108,7 @@ abstract class AbstractTransport {
      * Partially refunds an existing order
      * @param $order object Order with id and refunds object
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function refundOrder($order) {
         return $this->send_order($order, 'refund', false);
@@ -136,7 +118,7 @@ abstract class AbstractTransport {
      * Send order fulfillment status
      * @param $fulfillment object Fulfillment with order id and fulfillment details
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function fulfillOrder($fulfillment) {
         return $this->send_order($fulfillment, 'fulfill', true);
@@ -146,7 +128,7 @@ abstract class AbstractTransport {
      * Send order decision status
      * @param $decision object Decision on the order. reports riskified about what was your decision on the order.
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function decisionOrder($decision) {
         return $this->send_order($decision, 'decision', true);
@@ -156,7 +138,7 @@ abstract class AbstractTransport {
      * Cancels an existing order
      * @param $chargeback object ChargebackOrder with id and chargeback details
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function chargebackOrder($chargeback) {
         return $this->send_order($chargeback, 'chargeback', false);
@@ -166,7 +148,7 @@ abstract class AbstractTransport {
      * Send a Checkout to Riskified
      * @param $checkout object Checkout to send
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function createCheckout($checkout) {
         return $this->send_checkout($checkout, 'checkout_create');
@@ -176,72 +158,16 @@ abstract class AbstractTransport {
      * Notify that a Checkout failed
      * @param $checkout object Checkout to send (with PaymentDetails that include AuthotizationError field)
      * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
+     * @throws \RiskifiedAsync\Common\Exception\BaseException on any issue
      */
     public function deniedCheckout($checkout) {
         return $this->send_checkout($checkout, 'checkout_denied');
     }
 
-    /**
-     * Check eligibility for Deco payment
-     * @param $order object Order to send (only order id required)
-     * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
-     */
-    public function eligible($order) {
-        $this->url = Riskified::getHost('deco');
-        return $this->send_order($order, 'eligible', false);
-    }
-
-    /**
-     * Opt-in to Deco payment
-     * @param $order object Order to send (only order id required)
-     * @return object Response object
-     * @throws \Riskified\Common\Exception\BaseException on any issue
-     */
-    public function opt_in($order) {
-        $this->url = Riskified::getHost('deco');
-        return $this->send_order($order, 'opt_in', false);
-    }
-
     public function login($login) {
-        $this->url = Riskified::getHost('account');
-        return $this->send_account_event($login, 'login');
-    }
-
-    public function customerCreate($customer_create) {
-        $this->url = Riskified::getHost('account');
-        return $this->send_account_event($customer_create, 'customer_create');
-    }
-
-    public function customerUpdate($customer_update) {
-        $this->url = Riskified::getHost('account');
-        return $this->send_account_event($customer_update, 'customer_update');
-    }
-
-    public function logout($logout) {
-        $this->url = Riskified::getHost('account');
-        return $this->send_account_event($logout, 'logout');
-    }
-
-    public function resetPasswordRequest($reset_password_request) {
-        $this->url = Riskified::getHost('account');
-        return $this->send_account_event($reset_password_request, 'reset_password');
-    }
-
-    public function wishlistChanges($wishlist_changes) {
-        $this->url = Riskified::getHost('account');
-        return $this->send_account_event($wishlist_changes, 'wishlist');
-    }
-
-    public function redeem($redeem) {
-        $this->url = riskified::gethost('account');
-        return $this->send_account_event($redeem, 'redeem');
-    }
-
-    public function customerReachOut($customer_reach_out) {
-        $this->url = riskified::gethost('account');
-        return $this->send_account_event($customer_reach_out, 'contact');
+        $json = $login->toJson();
+        return $this->send_json_request($json, 'login');
+        return null;
     }
 
     public function sendHistoricalOrders($orders) {
@@ -254,14 +180,6 @@ abstract class AbstractTransport {
         if ($this->validate($order, $enforce_required_keys)) {
             $json = '{"order":' . $order->toJson() . '}';
             return $this->send_json_request($json, $endpoint);
-        }
-        return null;
-    }
-
-    protected function send_account_event($accountEvent, $endpoint, $enforce_required_keys = true) {
-        if ($this->validate($accountEvent, $enforce_required_keys)) {
-            $json = $accountEvent->toJson();
-            return $this->send_account_json_request($json, $endpoint);
         }
         return null;
     }
@@ -281,19 +199,18 @@ abstract class AbstractTransport {
     }
 
     protected function validate($order, $enforce_required_keys=true) {
-        if (Riskified::$validations == Validations::SKIP)
+        if (RiskifiedAsync::$validations == Validations::SKIP)
             return true;
-        return $order->validate($enforce_required_keys && Riskified::$validations == Validations::ALL);
+        return $order->validate($enforce_required_keys && RiskifiedAsync::$validations == Validations::ALL);
     }
 
     /**
      * path prefix to the Riskified endpoint
-     * @param $routing
      * @return string
      */
-    protected function endpoint_prefix($routing='api') {
+    protected function endpoint_prefix() {
         $protocol = ($this->use_https) ? 'https' : 'http';
-        return "$protocol://$this->url/$routing/";
+        return "$protocol://$this->url/api/";
     }
 
     /**
@@ -306,9 +223,9 @@ abstract class AbstractTransport {
         return array(
             'Content-Type: application/json',
             'Content-Length: '.strlen($data_string),
-            $signature::SHOP_DOMAIN_HEADER_NAME.':'.Riskified::$domain,
+            $signature::SHOP_DOMAIN_HEADER_NAME.':'.RiskifiedAsync::$domain,
             $signature::HMAC_HEADER_NAME.':'.$this->signature->calc_hmac($data_string),
-            'Accept: application/vnd.riskified.com; version='.Riskified::API_VERSION
+            'Accept: application/vnd.riskified.com; version='.RiskifiedAsync::API_VERSION
         );
     }
 }
